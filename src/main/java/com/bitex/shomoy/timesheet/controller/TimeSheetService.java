@@ -70,7 +70,7 @@ public class TimeSheetService {
         System.out.println(vals);
     }
 
-    @PostConstruct
+
     public void findById(){
         Scanner reader = new Scanner(System.in);  // Reading from System.in
         System.out.println("Please enter the id: ");
