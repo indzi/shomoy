@@ -6,5 +6,5 @@ package com.bitex.shomoy.timesheet.enums;
  */
 public enum ReasonType {
     WORK,
-    FREE;
+    FREE
 }

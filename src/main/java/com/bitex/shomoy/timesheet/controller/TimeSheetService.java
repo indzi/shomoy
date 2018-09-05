@@ -1,20 +1,15 @@
 package com.bitex.shomoy.timesheet.controller;
 
-import com.bitex.shomoy.db.DbContract;
-import com.bitex.shomoy.db.PostgresHelper;
 import com.bitex.shomoy.timesheet.entity.TimeSheetEntity;
 import com.bitex.shomoy.timesheet.enums.ReasonType;
 import com.bitex.shomoy.timesheet.repository.TimeSheetRepository;
-import com.bitex.shomoy.timesheet.service.TimesheetServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -31,15 +26,15 @@ public class TimeSheetService {
 
     public Map vals = new HashMap();
 
-    public void inputDate() throws ParseException, SQLException {
+
+    public void addIdleTime() throws ParseException, SQLException {
         TimeSheetEntity timeSheetEntity = new TimeSheetEntity();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 
         Scanner reader = new Scanner(System.in);  // Reading from System.in
         System.out.println("Please enter the date: ");
         String inputDate = reader.next();
-        String date = formatter.format((TemporalAccessor) new Date());
-        timeSheetEntity.setDate(date);
+        timeSheetEntity.setDate(inputDate);
         vals.put("date", inputDate);
 
         System.out.println("Please enter the start time: ");
@@ -75,26 +70,15 @@ public class TimeSheetService {
         System.out.println(vals);
     }
 
+    @PostConstruct
+    public void findById(){
+        Scanner reader = new Scanner(System.in);  // Reading from System.in
+        System.out.println("Please enter the id: ");
+        Long inputId = reader.nextLong();
+        TimeSheetEntity byId = timeSheetRepository.getById(inputId);
+        String reasonType = String.valueOf(byId.getReasonType());
+        System.out.println(reasonType);
 
 
-
-/*
-        public PostgresHelper ConnectToDb() {
-            PostgresHelper client = new PostgresHelper(
-                    DbContract.HOST,
-                    DbContract.DB_NAME,
-                    DbContract.USERNAME,
-                    DbContract.PASSWORD);
-
-            try {
-                if (client.connect()) {
-                    System.out.println("DB connected");
-                }
-
-            } catch (ClassNotFoundException | SQLException e) {
-                e.printStackTrace();
-            }
-
-            return client;
-    }*/
+    }
 }

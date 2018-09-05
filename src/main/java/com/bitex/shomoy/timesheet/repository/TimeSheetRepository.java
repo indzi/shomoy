@@ -11,7 +11,7 @@ import java.text.ParseException;
  * @author Neel Sinha (mailneelhere@gmail.com)
  * Date: 8/28/2018
  */
-@Repository
 public interface TimeSheetRepository extends JpaRepository<TimeSheetEntity, Long> {
+   TimeSheetEntity getById(Long id);
 }
 

@@ -1,6 +1,7 @@
 package com.bitex.shomoy.timesheet.entity;
 
-import com.sun.istack.internal.NotNull;
+
+import javax.validation.constraints.NotNull;
 
 import javax.persistence.*;
 
@@ -11,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = TimeSheetEntity.TABLE_NAME)
 public class TimeSheetEntity {
-    public static final String TABLE_NAME = "MARKET";
+    public static final String TABLE_NAME = "TSHT";
     private static final String SEQUENCE_NAME = TABLE_NAME + "_SEQ";
     private static final String SEQUENCE_GENERATOR_NAME = TABLE_NAME + "_SEQUENCE";
 
